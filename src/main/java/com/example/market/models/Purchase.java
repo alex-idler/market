@@ -1,6 +1,7 @@
 package com.example.market.models;
 
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,18 +12,20 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "purchase")
+@Table(name = "purchases")
 public class Purchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "user_id")
-    private int buyerId;
+    @ManyToOne
+    @JoinColumn
+    private User user;
 
-    @Column(name = "product_id")
-    private int productId;
+    @ManyToOne
+    @JoinColumn
+    private Product product;
 
     @Column(name = "date")
     private LocalDateTime dateTime;

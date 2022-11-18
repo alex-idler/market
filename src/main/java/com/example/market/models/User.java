@@ -16,16 +16,14 @@ import java.util.List;
 public class User {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "firstname")
     private String firstname;
 
-    @Column(name = "lastname")
     private String lastname;
 
-    @OneToMany() //todo========
+    @OneToMany(mappedBy = "user")
     private List<Purchase> purchases;
+
 }
