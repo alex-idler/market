@@ -1,12 +1,12 @@
 package com.example.market.models;
 
-
-import lombok.EqualsAndHashCode;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter @Setter
@@ -21,12 +21,13 @@ public class Purchase {
 
     @ManyToOne
     @JoinColumn
+    @JsonManagedReference
     private User user;
 
     @ManyToOne
     @JoinColumn
+    @JsonManagedReference
     private Product product;
 
-    @Column(name = "date")
-    private LocalDateTime dateTime;
+    private LocalDate date;
 }

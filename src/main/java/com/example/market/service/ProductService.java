@@ -10,11 +10,11 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-public class ProductServiceImp {
+public class ProductService {
     private ProductRepository productRepository;
 
     @Autowired
-    public ProductServiceImp(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 

@@ -11,15 +11,29 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-public class UserServiceImp {
+public class UserService {
 
     private final UserRepository userRepository;
     @Autowired
-    public UserServiceImp(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    public User getUserById(int id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    public List<User> findByLastname(String lastname) {
+        return userRepository.findByLastnameIgnoreCase(lastname);
+    }
+
+    public List<User> findByProductAndCount(String title, int count) {
+
+        return null;
+    }
+
 }

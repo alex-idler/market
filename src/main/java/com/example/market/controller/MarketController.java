@@ -1,32 +1,57 @@
 package com.example.market.controller;
 
 import com.example.market.models.Product;
+import com.example.market.models.Purchase;
 import com.example.market.models.User;
-import com.example.market.service.ProductServiceImp;
-import com.example.market.service.UserServiceImp;
+import com.example.market.service.ProductService;
+import com.example.market.service.PurchaseService;
+import com.example.market.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.stream.Collectors;
+import java.util.List;
 
 @RestController
 @RequestMapping("/")
 public class MarketController {
 
-    private final UserServiceImp userService;  //todo ===============================
-    private final ProductServiceImp productService; //todo =============================
+    private final UserService userService;
+    private final ProductService productService;
+    private final PurchaseService purchaseService;
     @Autowired
-    public MarketController(UserServiceImp userService, ProductServiceImp productService) {
+    public MarketController(UserService userService, ProductService productService, PurchaseService purchaseService) {
         this.userService = userService;
         this.productService = productService;
+        this.purchaseService = purchaseService;
     }
 
-    @GetMapping("index")
-    public String index() {
+    @GetMapping("users")
+    public List<User> findAllUsers() {
+        return userService.findAll();
+    }
 
-//        return productService.findAll().stream().map(Product::getTitle).toList().toString();
-        return userService.findAll().stream().map(User::getPurchases).toList().toString();
+    @GetMapping("user/{id}")
+    public User getUserById(@PathVariable("id") int id) {
+        return userService.getUserById(id);
+    }
+
+    @GetMapping("user")
+    public List<User> findByLastname(@RequestParam("lastname") String lastname) {
+        return userService.findByLastname(lastname);
+    }
+
+    @GetMapping("product")
+    public List<User> findByProductAndCount(@RequestParam("title") String title, @RequestParam("count") int count) {
+        return userService.findByProductAndCount(title, count);
+    }
+
+    @GetMapping("products")
+    public List<Product> findAllProducts() {
+        return productService.findAll();
+    }
+
+    @GetMapping("purchases")
+    public List<Purchase> findAllPurchases() {
+        return purchaseService.findAll();
     }
 }

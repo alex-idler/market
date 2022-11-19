@@ -1,10 +1,7 @@
 package com.example.market.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.stereotype.Repository;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,13 +15,14 @@ import java.util.List;
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String title;
 
-    private int price;
+    private double price;
 
-    @OneToMany(mappedBy = "product")
+    @JsonBackReference
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Purchase> purchases;
 }
