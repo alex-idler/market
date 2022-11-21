@@ -50,6 +50,11 @@ public class MarketController {
         return userService.findUsersBySumPrice(minSum, maxSum);
     }
 
+    @GetMapping("passive")
+    public List<User> findPassiveUsers(@RequestParam("value") int value) {
+        return userService.findPassiveUsers(value);
+    }
+
     @GetMapping("products")
     public List<Product> findAllProducts() {
         return productService.findAll();

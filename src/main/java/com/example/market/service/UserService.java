@@ -3,6 +3,8 @@ package com.example.market.service;
 import com.example.market.models.User;
 import com.example.market.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,10 +34,15 @@ public class UserService {
     }
 
     public List<User> findUsersByCountOfProducts(String title, Long value) {
-        return userRepository.findUsersByCountOfProducts("%" + title + "%", value);
+        return userRepository.findUsersByCountOfProducts("%" + title + "%", value); // пришлось тут дописывать проценты для регулярки, в запросе не получалось
     }
 
     public List<User> findUsersBySumPrice(Double minSum, Double maxSum) {
         return userRepository.findUsersBySumPrice(minSum, maxSum);
+    }
+
+    public List<User> findPassiveUsers(int value) {
+        Page<User> page = userRepository.findPassiveUsers(PageRequest.of(0, value));
+        return page.get().toList();
     }
 }
