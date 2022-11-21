@@ -35,4 +35,7 @@ public class UserService {
         return userRepository.findUsersByCountOfProducts("%" + title + "%", value);
     }
 
+    public List<User> findUsersBySumPrice(Double minSum, Double maxSum) {
+        return userRepository.findUsersBySumPrice(minSum, maxSum);
+    }
 }

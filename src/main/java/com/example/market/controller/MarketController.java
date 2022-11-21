@@ -40,9 +40,14 @@ public class MarketController {
         return userService.findByLastname(lastname);
     }
 
-    @GetMapping("test")
+    @GetMapping("count")
     public List<User> findUsersByCountOfProducts(@RequestParam("product") String title, @RequestParam("value") Long value) {
         return userService.findUsersByCountOfProducts(title, value);
+    }
+
+    @GetMapping("sum")
+    public List<User> findUsersBySumPrice(@RequestParam("min") Double minSum, @RequestParam("max") Double maxSum) {
+        return userService.findUsersBySumPrice(minSum, maxSum);
     }
 
     @GetMapping("products")
