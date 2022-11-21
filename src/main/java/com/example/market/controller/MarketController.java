@@ -40,9 +40,9 @@ public class MarketController {
         return userService.findByLastname(lastname);
     }
 
-    @GetMapping("product")
-    public List<User> findByProductAndCount(@RequestParam("title") String title, @RequestParam("count") int count) {
-        return userService.findByProductAndCount(title, count);
+    @GetMapping("test")
+    public List<User> findUsersByCountOfProducts(@RequestParam("product") String title, @RequestParam("value") Long value) {
+        return userService.findUsersByCountOfProducts(title, value);
     }
 
     @GetMapping("products")

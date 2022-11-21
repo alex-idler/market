@@ -31,9 +31,8 @@ public class UserService {
         return userRepository.findByLastnameIgnoreCase(lastname);
     }
 
-    public List<User> findByProductAndCount(String title, int count) {
-
-        return null;
+    public List<User> findUsersByCountOfProducts(String title, Long value) {
+        return userRepository.findUsersByCountOfProducts("%" + title + "%", value);
     }
 
 }
